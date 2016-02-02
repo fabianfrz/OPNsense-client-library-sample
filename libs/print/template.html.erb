@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+        <meta charset="UTF-8">
+        <title>Voucher</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <style>
+            .voucher_title { 
+                font-weight: bold;
+                text-align: center;
+                font-size: 16px;
+                padding-top: 20px;
+                
+            }
+            /* border for cutting */
+            td {
+                padding-top: 5px;
+            }
+            .voucher_start {
+                margin-left: 20px;
+            }
+            .nopagebreak {
+                page-break-inside: avoid;
+            }
+        </style>
+  </head>
+  <body>
+    <%-
+    counter = 0
+    layout = 3 
+    %>
+  <table>
+    <% 
+    (0..(voucher.count - 1)).step(layout) do |voucher_num| 
+    %>
+    <tbody class="nopagebreak">
+      <tr>
+        <% 1.upto layout do %>
+          <td colspan="2" class="voucher_title"><%= 'title'  %></td>
+    <% end %>
+      </tr>
+      <tr>
+        <% 1.upto layout do %>
+        <td rowspan="3" class="voucher_start"><img src="<%= 'image' || "" %>" alt="logo" /></td>
+        <td><%= 'text_before_code' %></td>
+        <% end %>
+        <tr>
+          <% 0.upto (layout - 1) do |i| %>
+            <% if voucher[voucher_num + i] %>
+              <td><%= voucher[voucher_num + i]['username'] + voucher[voucher_num + i]['password'] %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <% 1.upto layout do %>
+            <td><%= 'text_after_code'  %></td>
+          <% end %>
+        </tr>
+        </tbody>
+  <%
+  end
+  %>
+  </table>
+  </body>
+</html>
