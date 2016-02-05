@@ -7,7 +7,7 @@ require 'yaml'
 
 $path = File.dirname(File.expand_path(__FILE__))
 
-ConfigurationFile = "configuration.yml"
+ConfigurationFile = $path + "/configuration.yml"
 $configuration = {"opnsense_lib"=>"", "browser"=>"/usr/bin/firefox", "base_url"=>"https://192.168.1.1/api/", "api_credential_file"=>"apikey.txt", "ca_file"=>"cert.crt"}
 if File.exist? ConfigurationFile
   $configuration = $configuration.merge YAML.load(File.read(ConfigurationFile))
